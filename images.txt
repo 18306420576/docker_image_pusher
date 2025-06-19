@@ -6,4 +6,5 @@ xhofe/alist:latest
 --platform=linux/arm64 xiaoyaliu/alist
 prom/prometheus:latest
 grafana/grafana:latest
-starrocks/allin1-ubuntu
+starrocks/allin1-ubuntu:latest
+starrocks/allin1-ubuntu:3.2.3
