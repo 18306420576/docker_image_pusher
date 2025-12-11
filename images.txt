@@ -11,3 +11,4 @@ starrocks/dev-env-centos7:3.3.6
 johndockerhub/starrocks-admin:latest
 clickhouse:latest
 milvusdb/milvus:v2.4.0
+milvusdb/milvus:v2.6.7
