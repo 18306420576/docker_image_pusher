@@ -4,15 +4,20 @@ nginx
 --platform=linux/arm64 xiaoyaliu/alist
 prom/prometheus:latest
 grafana/grafana:latest
+
 starrocks/allin1-ubuntu:latest
 starrocks/be-ubuntu:latest
+
 starrocks/dev-env-centos7:3.2.3
 starrocks/dev-env-centos7:3.3.6
-johndockerhub/starrocks-admin:latest
+starrocks/dev-env-centos7:4.0-latest
+
+
 clickhouse:latest
-milvusdb/milvus:v2.4.0
-milvusdb/milvus:v2.6.7
 eipwork/kuboard:v4
+
+
+milvusdb/milvus:v2.6.7
 zilliz/attu:v2.6
-songxinliang/starrocks-admin:v1.0
+
 songxinliang/starrocks-admin:v1.1
