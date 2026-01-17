@@ -19,3 +19,6 @@ milvusdb/milvus:v2.6.7
 zilliz/attu:v2.6
 
 songxinliang/starrocks-admin:v1.1
+
+apache/skywalking-oap-server:9.7.0
+apache/skywalking-ui:9.7.0
