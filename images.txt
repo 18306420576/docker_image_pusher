@@ -23,4 +23,6 @@ songxinliang/starrocks-admin:v1.1
 apache/skywalking-oap-server:9.7.0
 apache/skywalking-ui:9.7.0
 
+neo4j:latest
+
 nacos/nacos-server:latest
