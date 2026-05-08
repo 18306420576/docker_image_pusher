@@ -24,5 +24,9 @@ apache/skywalking-oap-server:9.7.0
 apache/skywalking-ui:9.7.0
 
 neo4j:latest
+vesoft/nebula-metad:nightly
+vesoft/nebula-storaged:nightly
+vesoft/nebula-graphd:nightly
+vesoft/nebula-graph-studio:latest
 
 nacos/nacos-server:latest
