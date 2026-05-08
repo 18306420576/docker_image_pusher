@@ -28,5 +28,6 @@ vesoft/nebula-metad:nightly
 vesoft/nebula-storaged:nightly
 vesoft/nebula-graphd:nightly
 vesoft/nebula-graph-studio:latest
+vesoft/nebula-console:nightly
 
 nacos/nacos-server:latest
