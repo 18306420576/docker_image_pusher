@@ -31,3 +31,6 @@ vesoft/nebula-graph-studio:v3.7.0
 
 
 nacos/nacos-server:latest
+
+
+opengauss/opengauss:latest
