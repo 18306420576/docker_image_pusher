@@ -35,3 +35,4 @@ nacos/nacos-server:latest
 
 opengauss/opengauss:latest
 enmotech/opengauss:latest
+openeuler/openeuler:20.03-lts
