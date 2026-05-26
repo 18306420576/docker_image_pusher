@@ -17,6 +17,7 @@ eipwork/kuboard:v4
 
 milvusdb/milvus:v2.6.7
 zilliz/attu:v2.6
+ghcr.io/open-webui/open-webui:main
 
 songxinliang/starrocks-admin:v1.1
 
