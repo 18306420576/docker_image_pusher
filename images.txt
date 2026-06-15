@@ -33,6 +33,7 @@ vesoft/nebula-graph-studio:v3.7.0
 
 nacos/nacos-server:latest
 
+6053537/portainer-ce:latest
 
 opengauss/opengauss:latest
 enmotech/opengauss:latest
