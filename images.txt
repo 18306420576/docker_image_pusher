@@ -40,3 +40,7 @@ adminer:latest
 opengauss/opengauss:latest
 enmotech/opengauss:latest
 openeuler/openeuler:20.03-lts
+
+
+pgvector/pgvector:pg17
+supersonicbi/supersonic:latest
