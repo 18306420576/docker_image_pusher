@@ -42,7 +42,7 @@ enmotech/opengauss:latest
 openeuler/openeuler:20.03-lts
 
 gitlab/gitlab-ee:18.11.6-ee.0
-
+gitea/gitea:1.21.1
 
 pgvector/pgvector:pg17
 supersonicbi/supersonic:latest
