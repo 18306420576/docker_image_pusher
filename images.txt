@@ -40,6 +40,7 @@ adminer:latest
 opengauss/opengauss:latest
 enmotech/opengauss:latest
 openeuler/openeuler:20.03-lts
+--platform=linux/arm64 openeuler/openeuler:20.03-lts-sp4
 
 gitlab/gitlab-ee:18.11.6-ee.0
 gitea/gitea:1.21.1
