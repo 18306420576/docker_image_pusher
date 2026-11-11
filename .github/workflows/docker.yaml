@@ -14,22 +14,48 @@ env:
 
 jobs:
 
-  build:
-    name: Pull
+  prepare:
+    name: Prepare matrix
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.parse.outputs.matrix }}
+      count: ${{ steps.parse.outputs.count }}
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Parse images.txt
+      id: parse
+      shell: bash
+      run: |
+        set -euo pipefail
+        json="$(grep -vE '^[[:space:]]*(#|$)' images.txt \
+          | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//' \
+          | jq -R -s -c 'split("\n") | map(select(length > 0)) | map({line: .})')"
+        echo "镜像总数: $(jq 'length' <<<"$json")"
+        echo "count=$(jq 'length' <<<"$json")" >> "$GITHUB_OUTPUT"
+        echo "matrix={\"include\":$(jq -c . <<<"$json")}" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: Push ${{ matrix.line }}
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     steps:
     - name: Before freeing up disk space
       run: |
         echo "Before freeing up disk space"
-        echo "=============================================================================="
         df -hT
-        echo "=============================================================================="
-    # 清理磁盘空间
+        docker info | grep -iE "Docker Root Dir|Storage Driver" || true
+        docker system df || true
+
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
-        # 根据你的需求选择要清理的内容，默认清理大部分
-        tool-cache: false # 如果你需要使用Runner预装的工具（如Python），请设为false
+        tool-cache: false
         android: true
         dotnet: true
         haskell: true
@@ -37,37 +63,17 @@ jobs:
         docker-images: true
         swap-storage: true
 
-    # 增加可用磁盘空间
-    - name: Maximize build space
-      uses: easimon/maximize-build-space@master
-      with:
-
-        root-reserve-mb: 2048
-        swap-size-mb: 128
-        remove-dotnet: 'true'
-        remove-haskell: 'true'
-        # 如果空间还是不够用，可以把以下开启，清理出更多空间
-        remove-android: 'true'
-        remove-codeql: 'true'
-        build-mount-path: '/var/lib/docker/'
-
-    - name: Restart docker
-      run: sudo service docker restart
-
-    - name: Free up disk space complete
+    - name: Disk report after cleanup
       run: |
-        echo "Free up disk space complete"
-        echo "=============================================================================="
         df -hT
-        echo "=============================================================================="
+        docker info | grep -iE "Docker Root Dir|Storage Driver" || true
 
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Docker Setup Buildx
-      uses: docker/setup-buildx-action@v3
-
     - name: Build and push image Aliyun
+      env:
+        LINE: ${{ matrix.line }}
       run: |
         docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
         # 数据预处理,判断镜像是否重名
@@ -109,9 +115,8 @@ jobs:
                 temp_map[$image_name]=$name_space
             fi       
         done < images.txt
-        
-        
-        while IFS= read -r line || [ -n "$line" ]; do
+
+        for line in "$LINE"; do
             # 忽略空行与注释
             [[ -z "$line" ]] && continue
             if echo "$line" | grep -q '^\s*#'; then
@@ -161,6 +166,7 @@ jobs:
             echo "=============================================================================="
             docker rmi $image
             docker rmi $new_image
+            docker system prune -af --volumes || true
             echo "磁盘空间清理完毕"
             echo "=============================================================================="
             df -hT
