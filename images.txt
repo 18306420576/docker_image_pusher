@@ -30,7 +30,6 @@ vesoft/nebula-storaged:v3.6.0
 vesoft/nebula-graphd:v3.6.0
 vesoft/nebula-graph-studio:v3.7.0
 
-
 nacos/nacos-server:latest
 
 6053537/portainer-ce:latest
@@ -40,7 +39,7 @@ adminer:latest
 opengauss/opengauss:latest
 enmotech/opengauss:latest
 openeuler/openeuler:20.03-lts
-openeuler/openeuler:20.03-lts-sp4 --platform=linux/arm64 
+
 
 gitlab/gitlab-ee:18.11.6-ee.0
 gitea/gitea:1.21.1
