@@ -24,6 +24,18 @@ jobs:
         echo "=============================================================================="
         df -hT
         echo "=============================================================================="
+    # 清理磁盘空间
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # 根据你的需求选择要清理的内容，默认清理大部分
+        tool-cache: false # 如果你需要使用Runner预装的工具（如Python），请设为false
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
 
     # 增加可用磁盘空间
     - name: Maximize build space
