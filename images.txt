@@ -4,10 +4,6 @@ prom/prometheus:latest
 grafana/grafana:latest
 
 starrocks/allin1-ubuntu:latest
-starrocks/be-ubuntu:latest
-
-starrocks/dev-env-centos7:3.2.3
-starrocks/dev-env-centos7:3.3.6
 starrocks/dev-env-centos7:4.0-latest
 
 
